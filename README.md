@@ -4,6 +4,13 @@ Plantilla de aplicación cliente construida con React 19, TypeScript 6, Vite 8 y
 CSS 4. Incluye rutas con hash, tema claro/oscuro, estilos globales CSS-first y una utilidad
 para combinar clases de Tailwind.
 
+## Comunidad
+
+- [Cómo contribuir](CONTRIBUTING.md)
+- [Código de conducta](CODE_OF_CONDUCT.md)
+- [Política de seguridad](SECURITY.md)
+- [Licencia](LICENSE)
+
 ## Requisitos
 
 - Node.js 22.22 o superior. React Router 8 exige esta versión mínima.
@@ -16,13 +23,59 @@ node --version
 npm --version
 ```
 
-## Personalizar el nombre antes de comenzar
+## Usar esta plantilla en un repositorio nuevo
 
-Los ejemplos de este README utilizan `Plantilla` como nombre predeterminado del bundle y de
-su ruta pública. Si deseas cambiarlo, es recomendable hacerlo antes de comenzar a desarrollar
-o generar el primer bundle.
+Realiza esta personalización antes de comenzar a desarrollar o generar el primer bundle. Los
+ejemplos del repositorio original utilizan estos valores:
 
-Por ejemplo, para utilizar `MiPortafolio`, actualiza `vite.config.ts`:
+```text
+Usuario de GitHub:    jerssonarleyosma
+Repositorio:          plantillaReactTypescript2026
+Bundle:               Plantilla
+Ruta pública de IIS:  /Plantilla/
+```
+
+### Crear el nuevo repositorio
+
+La opción más sencilla es usar **Use this template** en GitHub. Para que ese botón aparezca, el
+propietario debe activar **Settings → General → Template repository**. El nuevo repositorio
+tendrá su propio historial y el remoto `origin` correcto.
+
+Si clonaste este repositorio directamente, sustituye su remoto por el tuyo:
+
+```bash
+git remote remove origin
+git remote add origin URL_DEL_NUEVO_REPOSITORIO
+git remote -v
+```
+
+### Personalizar la identidad
+
+Revisa estos archivos y reemplaza los valores del proyecto original:
+
+| Archivo                             | Qué debes cambiar                                            |
+| ----------------------------------- | ------------------------------------------------------------ |
+| `package.json`                      | El campo `name` y la ruta `--base` de `build:github`.        |
+| `index.html`                        | El contenido de `<title>`.                                   |
+| `README.md`                         | Título, descripción, usuario, repositorio y URLs de ejemplo. |
+| `SECURITY.md`                       | Correo de seguridad y nombre utilizado en el asunto.         |
+| `CODE_OF_CONDUCT.md`                | Correo privado para reportar incumplimientos.                |
+| `.github/ISSUE_TEMPLATE/config.yml` | Usuario y repositorio de la URL hacia `SECURITY.md`.         |
+
+Los enlaces relativos como `[Política de seguridad](SECURITY.md)` no necesitan cambios porque
+GitHub los resuelve dentro del repositorio actual.
+
+### Configurar el bundle y su ruta pública
+
+`outDir` y `base` cumplen funciones diferentes:
+
+```text
+outDir = nombre de la carpeta física generada
+base   = ruta pública desde la que se sirve la aplicación
+```
+
+Por ejemplo, para generar `MiPortafolio/` y publicarlo en
+`http://localhost/MiPortafolio/`, actualiza `vite.config.ts`:
 
 ```ts
 export default defineConfig({
@@ -34,59 +87,53 @@ export default defineConfig({
 })
 ```
 
-Los dos valores cumplen funciones diferentes:
+Si se genera `MiPortafolio/`, pero su contenido se publica directamente en
+`http://localhost/`, utiliza `base: '/'` y conserva `outDir: 'MiPortafolio'`.
+
+Cuando cambies `outDir`, actualiza también:
 
 ```text
-outDir = nombre de la carpeta física generada
-base   = ruta pública desde la que se sirve la aplicación
+.gitignore                                      /MiPortafolio/
+.prettierignore                                 MiPortafolio/
+.github/workflows/deploy-pages-react-typescript.yml  path: ./MiPortafolio
 ```
 
-Si IIS publica la aplicación en `http://localhost/MiPortafolio/`, utiliza:
+Si la rama principal no se llama `main`, cambia también `on.push.branches` en el workflow.
 
-```ts
-export default defineConfig({
-  base: '/MiPortafolio/',
-  build: {
-    outDir: 'MiPortafolio',
-  },
-})
+### Configurar GitHub Pages
+
+En `package.json`, la opción `--base` de `build:github` debe coincidir exactamente con el nombre
+del nuevo repositorio:
+
+```json
+{
+  "scripts": {
+    "build:github": "tsc -b && vite build --base=/TU_REPOSITORIO/"
+  }
+}
 ```
 
-Si la carpeta generada se llama `MiPortafolio/`, pero su contenido se publica directamente en
-`http://localhost/`, utiliza:
+En GitHub activa **Settings → Pages → Build and deployment → GitHub Actions**. El workflow
+compilará el proyecto y subirá la carpeta configurada en `path`.
 
-```ts
-export default defineConfig({
-  base: '/',
-  build: {
-    outDir: 'MiPortafolio',
-  },
-})
-```
+### Revisar la licencia
 
-También debes sustituir el nombre del bundle en `.gitignore`:
-
-```gitignore
-/MiPortafolio/
-```
-
-Y en `.prettierignore`:
+La licencia MIT exige conservar el aviso original cuando se reutiliza una parte sustancial de
+esta plantilla. Puedes añadir tu propio copyright sin eliminar el existente:
 
 ```text
-MiPortafolio/
+Copyright (c) 2026 Jersson Arley Osma Cifuentes
+Copyright (c) 2026 NOMBRE_DEL_NUEVO_AUTOR
 ```
 
-Por tanto, al renombrar el bundle revisa estos cinco lugares:
+### Valores que se adaptan automáticamente
 
-1. `base` en `vite.config.ts`.
-2. `build.outDir` en `vite.config.ts`.
-3. La carpeta excluida en `.gitignore`.
-4. La carpeta excluida en `.prettierignore`.
-5. La opción `--base` del script `build:github` en `package.json`, si también cambias el nombre
-   del repositorio o su ruta en GitHub Pages.
+No necesitas modificar:
 
-No necesitas modificar las rutas construidas con `import.meta.env.BASE_URL`; Vite utilizará
-automáticamente el nuevo valor de `base`.
+- Las rutas construidas con `import.meta.env.BASE_URL`; Vite utilizará el nuevo `base`.
+- Los nombres con hash de JavaScript, CSS e imágenes; Vite los genera en cada build.
+- `HashRouter`, salvo que quieras cambiar la estrategia de navegación.
+- Los enlaces relativos entre los documentos Markdown del repositorio.
 
 ## Instalación y primer inicio
 
@@ -427,11 +474,16 @@ cambiar a `/`.
 
 ### GitHub Pages
 
-El repositorio remoto se llama `plantillaReactTypescript2026`, por lo que su dirección
-predeterminada de GitHub Pages utiliza esta base pública:
+Para un repositorio de proyecto, GitHub Pages publica bajo el nombre del repositorio:
 
 ```text
-/plantillaReactTypescript2026/
+https://TU_USUARIO.github.io/TU_REPOSITORIO/
+```
+
+Por eso el bundle debe usar:
+
+```text
+/TU_REPOSITORIO/
 ```
 
 El comando específico para generar ese bundle es:
@@ -440,15 +492,14 @@ El comando específico para generar ese bundle es:
 npm run build:github
 ```
 
-Este script ejecuta:
+En este repositorio, el script ejecuta:
 
 ```text
 tsc -b && vite build --base=/plantillaReactTypescript2026/
 ```
 
-La opción `--base` del comando reemplaza temporalmente el valor `/Plantilla/` de
-`vite.config.ts`. La salida física continúa generándose dentro de `Plantilla/`, pero sus URLs
-quedan preparadas para publicarse en:
+La opción `--base` reemplaza temporalmente el valor `/Plantilla/` de `vite.config.ts`. La salida
+física continúa generándose dentro de `Plantilla/`, pero sus URLs quedan preparadas para:
 
 ```text
 https://jerssonarleyosma.github.io/plantillaReactTypescript2026/
@@ -460,8 +511,8 @@ Como el proyecto utiliza `HashRouter`, una vista se publica con una dirección c
 https://jerssonarleyosma.github.io/plantillaReactTypescript2026/#/Prueba
 ```
 
-Si cambia el nombre del repositorio, también debe actualizarse la opción `--base` del script
-`build:github` en `package.json`.
+Cuando reutilices la plantilla, cambia el usuario y el repositorio de los ejemplos y actualiza
+la opción `--base` de `build:github`.
 
 ## Formato compartido
 

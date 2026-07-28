@@ -165,3 +165,6 @@ Al reportar un error incluye:
 - Versión de Node.js.
 - Navegador y sistema operativo.
 - Mensajes relevantes de la consola.
+
+Los posibles problemas de seguridad no deben publicarse como issues. Sigue `SECURITY.md` y
+envía el reporte por el canal privado indicado allí.

@@ -1,0 +1,96 @@
+name: Reportar un error
+description: Informa un comportamiento incorrecto y reproducible de la plantilla.
+title: '[Bug]: '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar el problema. No incluyas datos sensibles. Si se trata de una vulnerabilidad, sigue `SECURITY.md` y no continúes con este formulario.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afectada
+      options:
+        - Componentes o vistas
+        - Estilos o Tailwind
+        - Rutas
+        - Build o despliegue
+        - Documentación
+        - Otra
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: Explica qué ocurre y por qué consideras que es un error.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Pasos para reproducirlo
+      description: Incluye un ejemplo mínimo y los pasos en orden.
+      placeholder: |
+        1. Ejecutar...
+        2. Abrir...
+        3. Observar...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento observado
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Versión de Node.js
+      description: Ejecuta `node --version`.
+      placeholder: v24.18.0
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Navegador y sistema operativo
+      placeholder: Firefox 147 en Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Pega mensajes relevantes sin secretos ni datos personales.
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Capturas
+      description: Arrastra aquí imágenes que ayuden a comprender el problema.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Comprobaciones
+      options:
+        - label: Busqué issues existentes y no encontré uno equivalente.
+          required: true
+        - label: Confirmo que este reporte no contiene una vulnerabilidad ni datos sensibles.
+          required: true

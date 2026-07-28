@@ -1,0 +1,69 @@
+name: Solicitar una mejora
+description: Propón una funcionalidad o mejora para la plantilla.
+title: '[Mejora]: '
+body:
+  - type: markdown
+    attributes:
+      value: Gracias por proponer una mejora. Explica primero la necesidad, no solo la solución.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área relacionada
+      options:
+        - Componentes o vistas
+        - Estilos o Tailwind
+        - Rutas
+        - Build o despliegue
+        - Documentación
+        - Nueva herramienta
+        - Otra
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+      description: Describe qué resulta difícil, limitado o imposible actualmente.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solución propuesta
+      description: Explica cómo debería funcionar desde el punto de vista de quien usa la plantilla.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Indica otras soluciones evaluadas y por qué no fueron suficientes.
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Ejemplos o referencias
+      description: Añade capturas, enlaces o ejemplos que ayuden a comprender la propuesta.
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: ¿Quieres implementar la mejora?
+      options:
+        - Sí, puedo preparar un pull request
+        - Tal vez, necesito orientación
+        - No
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Comprobación
+      options:
+        - label: Busqué solicitudes existentes y no encontré una equivalente.
+          required: true
