@@ -32,15 +32,12 @@ Acordamos restringir los siguientes comportamientos en nuestra comunidad. Las in
 6. **Poner en peligro.** Causar, incitar o amenazar con violencia u otro tipo de daño hacia cualquier persona o grupo.
 7. Comportarse de cualquier otra manera que **amenace el bienestar** de nuestra comunidad.
 
-
-
 ### Otras restricciones
 
 1. **Identidad engañosa.** Hacerse pasar por otra persona por cualquier razón, o fingir ser alguien más para evadir acciones disciplinarias.
 2. **Falta de atribución.** No acreditar correctamente las fuentes del contenido que se contribuye.
 3. **Material promocional.** Compartir contenido de marketing u otro contenido comercial de una manera que esté fuera de las normas de la comunidad.
 4. **Comunicación irresponsable.** No presentar de manera responsable contenido que incluya, enlace o describa cualquier otro comportamiento restringido.
-
 
 ## Reportar un incidente
 
