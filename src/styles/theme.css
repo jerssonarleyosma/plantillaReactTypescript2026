@@ -1,0 +1,55 @@
+@custom-variant dark (&:where(.dark, .dark *));
+/* le decimmos a tailwind que dark: se podra usar si existe dark como clase en la etiqueta o en algun padre ejemplo: dark dark:bg-red-500*/
+
+@theme {
+  --color-background: var(--app-background);
+  --color-text: var(--app-text);
+  --color-heading: var(--app-heading);
+  --color-border: var(--app-border);
+  --color-code: var(--app-code);
+  --color-accent: var(--app-accent);
+  --color-accent-soft: var(--app-accent-soft);
+  --color-accent-border: var(--app-accent-border);
+  --color-social: var(--app-social);
+
+  --font-text: var(--app-font-text);
+  --font-heading: var(--app-font-heading);
+  --font-mono: var(--app-font-mono);
+
+  --shadow-card: var(--app-shadow);
+}
+
+:root,
+.light {
+  --app-background: #fff;
+  --app-text: #6b6375;
+  --app-heading: #08060d;
+  --app-border: #e5e4e7;
+  --app-code: #f4f3ec;
+  --app-accent: #aa3bff;
+  --app-accent-soft: rgb(170 59 255 / 10%);
+  --app-accent-border: rgb(170 59 255 / 50%);
+  --app-social: rgb(244 243 236 / 50%);
+  --app-shadow: rgb(0 0 0 / 10%) 0 10px 15px -3px, rgb(0 0 0 / 5%) 0 4px 6px -2px;
+
+  --app-font-text: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --app-font-heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --app-font-mono: ui-monospace, Consolas, monospace;
+
+  color-scheme: light;
+}
+
+.dark {
+  --app-background: #16171d;
+  --app-text: #9ca3af;
+  --app-heading: #f3f4f6;
+  --app-border: #2e303a;
+  --app-code: #1f2028;
+  --app-accent: #c084fc;
+  --app-accent-soft: rgb(192 132 252 / 15%);
+  --app-accent-border: rgb(192 132 252 / 50%);
+  --app-social: rgb(47 48 58 / 50%);
+  --app-shadow: rgb(0 0 0 / 40%) 0 10px 15px -3px, rgb(0 0 0 / 25%) 0 4px 6px -2px;
+
+  color-scheme: dark;
+}

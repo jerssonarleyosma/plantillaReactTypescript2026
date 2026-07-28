@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@import './theme.css';
+@import './base.css';
+
+/*
+Directiva	¿Para qué sirve?	Equivalente en Tailwind 3
+@import	Importa Tailwind y otros archivos CSS.	@tailwind base/components/utilities
+@theme	Define tokens de diseño (colores, fuentes, espaciados, breakpoints, etc.).	theme.extend
+@utility	Crea una utilidad personalizada.	plugins o CSS manual
+@variant	Aplica una variante dentro de una regla CSS.	hover:, dark:, etc.
+@custom-variant	Crea variantes nuevas.	Plugins o addVariant()
+@source	Indica carpetas o archivos que Tailwind debe escanear.	content
+@plugin	Carga un plugin de Tailwind.	plugins
+*/
