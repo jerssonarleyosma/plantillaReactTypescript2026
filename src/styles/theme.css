@@ -1,6 +1,3 @@
-@custom-variant dark (&:where(.dark, .dark *));
-/* le decimmos a tailwind que dark: se podra usar si existe dark como clase en la etiqueta o en algun padre ejemplo: dark dark:bg-red-500*/
-
 @theme {
   --color-background: var(--app-background);
   --color-text: var(--app-text);

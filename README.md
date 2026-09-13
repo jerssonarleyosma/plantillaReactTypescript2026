@@ -61,9 +61,9 @@ Revisa estos archivos y reemplaza los valores del proyecto original:
 | `SECURITY.md`                       | Correo de seguridad y nombre utilizado en el asunto.         |
 | `CODE_OF_CONDUCT.md`                | Correo privado para reportar incumplimientos.                |
 | `.github/ISSUE_TEMPLATE/config.yml` | Usuario y repositorio de la URL hacia `SECURITY.md`.         |
-
-Los enlaces relativos como `[Política de seguridad](SECURITY.md)` no necesitan cambios porque
-GitHub los resuelve dentro del repositorio actual.
+| `vite.config.ts`                    | `base`, `outDir`, `input` y `output`.                        |
+| `.gitignore`                        | Cambiar `Plantilla` por el nombre requerido.                 |
+| `.prettierignore`                   | Cambiar `Plantilla` por el nombre requerido.                 |
 
 ### Configurar el bundle y su ruta pública
 
@@ -132,7 +132,8 @@ No necesitas modificar:
 
 - Las rutas construidas con `import.meta.env.BASE_URL`; Vite utilizará el nuevo `base`.
 - Los nombres con hash de JavaScript, CSS e imágenes; Vite los genera en cada build.
-- `HashRouter`, salvo que quieras cambiar la estrategia de navegación.
+- `HashRouter`, salvo que quieras utilizar `BrowserRouter`; en IIS tendrás que configurar
+  `web.config`.
 - Los enlaces relativos entre los documentos Markdown del repositorio.
 
 ## Instalación y primer inicio
@@ -156,18 +157,24 @@ Vite mostrará en la terminal la dirección local. Como el proyecto tiene config
 http://localhost:5173/Plantilla/
 ```
 
+Esta plantilla utiliza `HashRouter`, por lo que la ruta de cada vista se escribe después de `#/`:
+
+```text
+http://localhost:5173/Plantilla/#/nombredelavista
+```
+
 ## Comandos disponibles
 
-| Comando                | Función                                                  |
-| ---------------------- | -------------------------------------------------------- |
-| `npm install`          | Instala las dependencias declaradas en `package.json`.   |
-| `npm run dev`          | Inicia Vite en modo desarrollo con HMR.                  |
-| `npm run build`        | Genera el bundle para la ruta `/Plantilla/`.             |
-| `npm run build:github` | Genera el bundle con la base requerida por GitHub Pages. |
-| `npm run preview`      | Sirve localmente el último bundle generado.              |
-| `npm run lint`         | Revisa los archivos TypeScript y TSX con ESLint.         |
-| `npm run format`       | Formatea los archivos compatibles con Prettier.          |
-| `npm run format:check` | Comprueba el formato sin modificar archivos.             |
+| Comando                | Función                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| `npm install`          | Instala las dependencias declaradas en `package.json`.                       |
+| `npm run dev`          | Inicia Vite en modo desarrollo con HMR.                                      |
+| `npm run build`        | Genera el bundle para la ruta `/Plantilla/`.                                 |
+| `npm run build:github` | Genera el bundle con la base requerida por el workflow de GitHub Pages.      |
+| `npm run preview`      | Sirve localmente el último bundle generado.                                  |
+| `npm run lint`         | Busca posibles errores y malas prácticas en los archivos TypeScript y React. |
+| `npm run format`       | Formatea el código según la configuración de `prettier.config.js`.           |
+| `npm run format:check` | Comprueba el formato del código sin modificar los archivos.                  |
 
 Actualmente no hay un runner de pruebas automatizadas configurado.
 
@@ -418,8 +425,8 @@ La salida se organiza de esta manera:
 Plantilla/
 ├── index.html
 ├── js-css/
-│   ├── index-[hash].js
-│   └── index-[hash].css
+│   ├── entry-main-[hash].js
+│   └── main-[hash].css
 └── assets/
     ├── components/
     ├── web/
@@ -433,7 +440,7 @@ Plantilla/
 - `assets/images/`: imágenes importadas desde el código y procesadas por Vite.
 - `assets/fonts/`: fuentes importadas y procesadas.
 - `assets/otros/`: otros recursos procesados por Rollup.
-- `assets/components/` y `assets/web/`: estructura copiada desde `public/assets/`.
+- `assets/components/` y `assets/web/`: estructura copiada sin compilar desde `public/assets/`.
 
 Vite solo crea carpetas como `fonts/` u `otros/` cuando el proyecto contiene recursos de esos
 tipos. Los nombres con `[hash]` permiten invalidar la caché cuando cambia un archivo.
@@ -587,7 +594,12 @@ Estos pasos permiten reproducir la base tecnológica desde cero:
 1. Crear un proyecto Vite con React y TypeScript:
 
    ```bash
-   npm create vite@latest nombre-proyecto -- --template react-ts
+   npm create vite@latest
+   ```
+
+   El asistente solicita el nombre y las tecnologías que se utilizarán. Después:
+
+   ```bash
    cd nombre-proyecto
    npm install
    ```

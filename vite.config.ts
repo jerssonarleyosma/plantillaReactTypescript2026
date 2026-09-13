@@ -9,10 +9,13 @@ export default defineConfig({
   build: {
     outDir: 'Plantilla',
     rollupOptions: {
+      input: {
+        main: 'index.html',
+      },
       output: {
-        entryFileNames: 'js-css/[name]-[hash].js',
+        entryFileNames: 'js-css/entry-[name]-[hash].js',
 
-        chunkFileNames: 'js-css/[name]-[hash].js',
+        chunkFileNames: 'js-css/chunk-[name]-[hash].js',
 
         assetFileNames: (assetInfo) => {
           const nombre = assetInfo.names?.[0] ?? ''
