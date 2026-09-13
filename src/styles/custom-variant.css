@@ -1,0 +1,2 @@
+@custom-variant dark (&:where(.dark, .dark *));
+/* Habilita dark: cuando la clase dark existe en el elemento o en alguno de sus padres. */

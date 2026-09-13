@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import './theme.css';
 @import './base.css';
+@import './custom-variant.css';
+/* @import './components.css';
+@import './utilities.css'; */
 
 /*
 Directiva	¿Para qué sirve?	Equivalente en Tailwind 3
